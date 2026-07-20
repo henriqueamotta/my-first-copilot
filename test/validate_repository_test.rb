@@ -11,7 +11,7 @@ class ValidateRepositoryTest < Minitest::Test
   end
 
   def frontmatter(path)
-    content = File.read(path)
+    content = File.read(path, encoding: "UTF-8")
     assert content.start_with?("---\n"), "#{path} must start with a YAML frontmatter block"
 
     _, raw_frontmatter, body = content.split(/^---\s*$/, 3)
@@ -58,7 +58,7 @@ class ValidateRepositoryTest < Minitest::Test
 
   def test_readme_relative_links_point_to_existing_files
     readme = ROOT.join("README.md")
-    content = File.read(readme)
+    content = File.read(readme, encoding: "UTF-8")
 
     content.scan(/\]\(([^)]+)\)/).flatten.each do |link|
       next if link.start_with?("http://", "https://", "#")
