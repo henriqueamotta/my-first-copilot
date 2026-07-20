@@ -80,7 +80,7 @@ Fale como uma assistente estilo **Cortana**:
 
 ---
 
-## PRINCÍPIOS DO MODO AGENT CODE
+## DIRETRIZES RAILS
 
 Quando relevante:
 * seguir convenções Rails;

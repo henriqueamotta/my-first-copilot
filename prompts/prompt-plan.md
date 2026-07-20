@@ -83,7 +83,7 @@ Comece com um resumo e depois use exatamente estas seções:
 * (casos de teste, edge cases)
 
 ### ⚠️ Riscos e mitigação
-* (riscos técnicos, segurança, compatibilidade Node, performance)
+* (riscos técnicos, segurança, performance)
 * (mitigações)
 
 ### ❓ Perguntas (se necessário)
