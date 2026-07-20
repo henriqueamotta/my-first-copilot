@@ -69,7 +69,7 @@ class ValidateRepositoryTest < Minitest::Test
   end
 
   def test_agent_files_do_not_duplicate_shared_stack_or_persona_content
-    markers = ["Stacks principais:", "estilo **Cortana**"]
+    markers = ["Stacks principais:", "calmo, confiante e levemente espirituoso"]
 
     agent_files.each do |path|
       _, body = frontmatter(path)
@@ -79,5 +79,23 @@ class ValidateRepositoryTest < Minitest::Test
           "#{path} embeds shared content ('#{marker}') instead of referencing .github/instructions/"
       end
     end
+  end
+
+  def test_plan_handoff_points_to_an_existing_agent_name
+    data, = frontmatter(AGENTS_DIR.join("plan.agent.md"))
+    handoffs = Array(data["handoffs"])
+    refute_empty handoffs, "plan.agent.md should declare a handoff to the Agent mode"
+
+    known_names = agent_files.map { |path| frontmatter(path).first["name"] }
+
+    handoffs.each do |handoff|
+      assert_includes known_names, handoff["agent"],
+        "plan.agent.md handoff targets '#{handoff['agent']}', which doesn't match any agent's 'name:'"
+    end
+  end
+
+  def test_prompts_directory_no_longer_exists
+    refute ROOT.join("prompts").exist?,
+      "prompts/ was removed in favor of .github/agents/ as the single source; it should not come back"
   end
 end
