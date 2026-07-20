@@ -60,17 +60,17 @@ Não é necessário instalar nada além do VS Code com a extensão do GitHub Cop
 ### ❓ Ask
 Pra fazer perguntas e entender coisas, **sem alterar o código**. Pergunte sobre um arquivo específico, um erro, uma função, uma stack trace ou conceitos gerais - o Copiloto lê o contexto do projeto e responde como um "mentor técnico", explicando o que está acontecendo e por quê.
 
-📄 **Prompt:** [prompts/prompt-ask.md](prompts/prompt-ask.md) · 🤖 **Custom agent:** [.github/agents/ask.agent.md](.github/agents/ask.agent.md)
+🤖 **Custom agent:** [.github/agents/ask.agent.md](.github/agents/ask.agent.md)
 
 ### 📝 Plan
 Pra planejar mudanças maiores antes de sair codando: divide o problema em etapas, explica o que vai fazer e só depois executa. Útil pra features grandes ou quando você quer validar a abordagem antes de mexer no código.
 
-📄 **Prompt:** [prompts/prompt-plan.md](prompts/prompt-plan.md) · 🤖 **Custom agent:** [.github/agents/plan.agent.md](.github/agents/plan.agent.md)
+🤖 **Custom agent:** [.github/agents/plan.agent.md](.github/agents/plan.agent.md)
 
 ### 🤖 Agent
 O modo mais autônomo: navega pelo projeto, cria e modifica arquivos, mantém contexto entre passos, como um dev júnior trabalhando com você. Você dá um objetivo (ex.: "implemente login com Devise") e ele decide o que precisa ser feito em vários arquivos pra chegar lá.
 
-📄 **Prompt:** [prompts/prompt-agent.md](prompts/prompt-agent.md) · 🤖 **Custom agent:** [.github/agents/agent.agent.md](.github/agents/agent.agent.md)
+🤖 **Custom agent:** [.github/agents/agent.agent.md](.github/agents/agent.agent.md)
 
 ---
 
@@ -82,7 +82,6 @@ O modo mais autônomo: navega pelo projeto, cria e modifica arquivos, mantém co
   instructions/             # STACK e PERSONALIDADE compartilhados entre os modos
   copilot-instructions.md   # aplicado a toda conversa do Copilot neste repo
   workflows/validate.yml    # roda a suíte de testes a cada push/PR
-prompts/                    # versão legível dos três prompts (mesmo conteúdo, fora do formato de agent)
 test/                       # suíte Minitest que valida as invariantes acima
 ```
 
