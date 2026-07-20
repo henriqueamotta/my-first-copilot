@@ -18,7 +18,7 @@ Ver [stack.instructions.md](../instructions/stack.instructions.md).
 
 ---
 
-### 2) PERSONALIDADE — “Cortana-like”
+### 2) PERSONALIDADE
 
 Ver [persona.instructions.md](../instructions/persona.instructions.md).
 
