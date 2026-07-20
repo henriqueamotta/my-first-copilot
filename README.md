@@ -55,7 +55,7 @@ Não é necessário instalar nada além do VS Code com a extensão do GitHub Cop
 | **Saída principal** | Diagnóstico/orientação curta | Plano estruturado revisável | Implementação + testes |
 | **Arquivo** | [ask.agent.md](.github/agents/ask.agent.md) | [plan.agent.md](.github/agents/plan.agent.md) | [agent.agent.md](.github/agents/agent.agent.md) |
 
-<sub>* Quantas perguntas o próprio Copiloto pode fazer pra você antes de seguir com suposições declaradas — não um limite sobre o que você pode perguntar a ele.</sub>
+<sub>* Quantas perguntas o próprio Copiloto pode fazer pra você antes de seguir com suposições declaradas - não um limite sobre o que você pode perguntar a ele.</sub>
 
 ### ❓ Ask
 Pra fazer perguntas e entender coisas, **sem alterar o código**. Pergunte sobre um arquivo específico, um erro, uma função, uma stack trace ou conceitos gerais - o Copiloto lê o contexto do projeto e responde como um "mentor técnico", explicando o que está acontecendo e por quê.
@@ -71,6 +71,57 @@ Pra planejar mudanças maiores antes de sair codando: divide o problema em etapa
 O modo mais autônomo: navega pelo projeto, cria e modifica arquivos, mantém contexto entre passos, como um dev júnior trabalhando com você. Você dá um objetivo (ex.: "implemente login com Devise") e ele decide o que precisa ser feito em vários arquivos pra chegar lá.
 
 🤖 **Custom agent:** [.github/agents/agent.agent.md](.github/agents/agent.agent.md)
+
+---
+
+## 🔍 Mesma pergunta, três respostas
+
+Pra deixar a diferença concreta, aqui está o que cada modo faria com o pedido **"implemente login com Devise"** - trechos curtos, não a resposta completa:
+
+<table>
+<tr><td width="120"><strong>❓ Ask</strong></td><td>
+
+> Certo. Login com Devise dá pra fazer em poucos passos: adicionar a gem, rodar o installer, gerar o model `User` e as views.
+> Como confirmar: depois de `rails generate devise:install` e `rails generate devise User`, veja se a migration e a rota `devise_for :users` foram criadas.
+> Opções: usar as views padrão do Devise, ou rodar `rails generate devise:views` pra customizar.
+> Se quiser, eu te dou o patch completo com os comandos e o `Gemfile` atualizado.
+
+*(orientação e opções - nenhum arquivo foi tocado)*
+
+</td></tr>
+<tr><td><strong>📝 Plan</strong></td><td>
+
+> **✅ Objetivo:** adicionar autenticação de usuários via Devise.
+> **📦 Escopo:** inclui gem, migration, rotas e views padrão; não inclui autorização (Pundit) nem testes end-to-end.
+> **🪜 Passos:** 1) adicionar `gem "devise"` 2) `bundle install` 3) `rails generate devise:install` 4) `rails generate devise User` 5) `rails db:migrate` 6) `devise_for :users` em `config/routes.rb`.
+> **🧪 Testes:** request spec cobrindo login/logout.
+> **▶️ Próximo passo:** aprova o plano? Posso implementar em seguida.
+
+*(plano estruturado e revisável - nenhum arquivo foi tocado, mas há um handoff pronto pro Agent)*
+
+</td></tr>
+<tr><td><strong>🤖 Agent</strong></td><td>
+
+```diff
+# Gemfile
++ gem "devise"
+```
+```
+$ bundle install && rails generate devise:install
+$ rails generate devise User && rails db:migrate
+```
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  devise_for :users
+end
+```
+> Rodei o installer, gerei o model `User` e a migration, e adicionei `devise_for :users` nas rotas. Também criei `spec/requests/sessions_spec.rb` cobrindo login com credenciais válidas e inválidas.
+
+*(implementação completa, incluindo testes)*
+
+</td></tr>
+</table>
 
 ---
 
